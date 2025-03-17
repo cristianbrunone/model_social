@@ -7,7 +7,6 @@ class Tab2DetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Detalhe Tab 1 - $id')),
       body: Center(child: Text('Conteúdo do Detalhe $id - Tab1')),
     );
   }

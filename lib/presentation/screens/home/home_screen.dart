@@ -1,10 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import '../../../core/constants/routes.dart';
-import '../home/tabs/tab1/tab1_screen.dart';
-import '../home/tabs/tab2/tab2_screen.dart';
-import '../home/tabs/tab3/tab3_screen.dart';
-import '../home/tabs/tab4/tab4_screen.dart';
+import 'package:citas/core/constants/imports.dart';
 
 class HomeShell extends StatefulWidget {
   final Widget child;
@@ -23,16 +17,31 @@ class _HomeShellState extends State<HomeShell> {
   @override
   Widget build(BuildContext context) {
     final location = GoRouterState.of(context).uri.toString();
+
+    print('Current location: $location');
+
     _currentIndex = tabs.indexWhere((tab) => location.contains(tab));
-    if (_currentIndex == -1) _currentIndex = 0;
+
+    if (_currentIndex == -1) {
+      _currentIndex = 0;
+    }
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Home Shell')),
+      appBar: AppBar(
+        title: const Text('Home Shell'),
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+      ),
       body: widget.child,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: Colors.black, // ✅ Cor dos itens selecionados
+        unselectedItemColor: Colors.black54, // ✅ Cor dos itens não selecionados
         onTap: (index) {
-          context.go('${AppRoutes.home}/${tabs[index]}');
+          final tabPath = '/home/${tabs[index]}';
+          print('Navigating to $tabPath');
+          context.go(tabPath);
         },
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Tab 1'),

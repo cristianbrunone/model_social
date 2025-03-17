@@ -1,7 +1,6 @@
 class AppRoutes {
   static const login = '/login';
   static const register = '/register';
-  static const registerStep1 = 'step1';
   static const registerStep2 = 'step2';
   static const registerStep3 = 'step3';
 

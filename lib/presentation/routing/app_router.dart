@@ -5,70 +5,59 @@ part 'app_router.g.dart';
 @riverpod
 GoRouter goRouter(Ref ref) {
   return GoRouter(
-    initialLocation: AppRoutes.login,
+    initialLocation: '/login',
     routes: [
+      /// Login
+      GoRoute(path: '/login', builder: (_, __) => const LoginScreen()),
+
+      /// Register Flow
       GoRoute(
-        path: AppRoutes.login,
-        builder: (_, __) => const LoginScreen(),
-      ),
-      GoRoute(
-        path: AppRoutes.register,
+        path: '/register',
         builder: (_, __) => const RegisterStep1Screen(),
         routes: [
           GoRoute(
-            path: AppRoutes.registerStep2,
+            path: 'step2', // Vai resolver para /register/step2
             builder: (_, __) => const RegisterStep2Screen(),
           ),
           GoRoute(
-            path: AppRoutes.registerStep3,
+            path: 'step3', // Vai resolver para /register/step3
             builder: (_, __) => const RegisterStep3Screen(),
           ),
         ],
       ),
 
+      /// Home com ShellRoute + BottomNav
       ShellRoute(
         builder: (context, state, child) => HomeShell(child: child),
         routes: [
           GoRoute(
-            path: AppRoutes.home,
-            redirect: (_, __) => '${AppRoutes.home}/${AppRoutes.tab1}',
+            path: '/home/tab1',
+            builder: (_, __) => const Tab1Screen(),
             routes: [
               GoRoute(
-                path: AppRoutes.tab1,
-                builder: (_, __) => const Tab1Screen(),
-                routes: [
-                  GoRoute(
-                    path: 'detail/:id',
-                    builder: (context, state) {
-                      final id = state.pathParameters['id']!;
-                      return Tab1DetailScreen(id: id);
-                    },
-                  ),
-                ],
-              ),
-              GoRoute(
-                path: AppRoutes.tab2,
-                builder: (_, __) => const Tab2Screen(),
-                routes: [
-                  GoRoute(
-                    path: 'detail/:id',
-                    builder: (context, state) {
-                      final id = state.pathParameters['id']!;
-                      return Tab2DetailScreen(id: id);
-                    },
-                  ),
-                ],
-              ),
-              GoRoute(
-                path: AppRoutes.tab3,
-                builder: (_, __) => const Tab3Screen(),
-              ),
-              GoRoute(
-                path: AppRoutes.tab4,
-                builder: (_, __) => const Tab4Screen(),
+                path: 'detail/:id',
+                builder: (context, state) {
+                  final id = state.pathParameters['id']!;
+                  return Tab1DetailScreen(id: id);
+                },
               ),
             ],
           ),
+          GoRoute(
+            path: '/home/tab2',
+            builder: (_, __) => const Tab2Screen(),
+            routes: [
+              GoRoute(
+                path: 'detail/:id',
+                builder: (context, state) {
+                  final id = state.pathParameters['id']!;
+                  return Tab2DetailScreen(id: id);
+                },
+              ),
+            ],
+          ),
+          GoRoute(path: '/home/tab3', builder: (_, __) => const Tab3Screen()),
+          GoRoute(path: '/home/tab4', builder: (_, __) => const Tab4Screen()),
         ],
       ),
     ],

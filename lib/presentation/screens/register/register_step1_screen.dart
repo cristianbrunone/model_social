@@ -10,7 +10,7 @@ class RegisterStep1Screen extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            context.go('/register/step1/step2');
+            context.go('/register/step2');
           },
           child: const Text('Ir para Passo 2'),
         ),

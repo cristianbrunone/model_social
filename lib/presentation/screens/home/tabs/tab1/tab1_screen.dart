@@ -5,6 +5,11 @@ class Tab1Screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Center(child: Text('Tab1')));
+    return Center(
+      child: ElevatedButton(
+        onPressed: () => context.push('/home/tab1/detail/123'),
+        child: const Text('Detalhe do Item 123 - Tab1'),
+      ),
+    );
   }
 }
